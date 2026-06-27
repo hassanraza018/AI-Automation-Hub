@@ -6,7 +6,7 @@ This workflow automatically fetches live weather data from OpenWeatherMap every 
 
 ---
 
-## ✨ Features
+## Features
 
 - ⏰ Runs automatically every 12 hours
 - 🌍 Fetches live weather data using OpenWeatherMap API
@@ -45,7 +45,7 @@ Gmail
 
 ## 📧 Output
 
-![Email Output](output-email.jpg)
+![Email Output](email-output.jpg)
 
 ---
 
