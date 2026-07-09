@@ -113,13 +113,6 @@ The AI agent classifies each lead using a scoring matrix based on timeline and d
 
 ![Airtable](airtable.png)
 
-### Email Output
-
-![Email](email-output.jpg)
-
-### Follow-up Email
-
-![Follow-up](Follow up email.jpg)
 
 ## Notes
 
