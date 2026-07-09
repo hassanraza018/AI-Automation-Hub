@@ -189,19 +189,7 @@ This is a portfolio/demo project created to demonstrate AI-powered workflow auto
 
 ---
 
-# Future Improvements
-
-- [ ] HubSpot CRM integration
-- [ ] WhatsApp notifications
-- [ ] Lead deduplication
-- [ ] AI lead scoring dashboard
-- [ ] Calendly integration
-- [ ] Multi-language email support
-- [ ] Error handling and retry logic
-
----
-
-# Author
+Author
 
 ## Hassan Raza
 
