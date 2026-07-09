@@ -1,140 +1,220 @@
-# Real Estate Lead Qualification
+# AI-Powered Real Estate Lead Qualification System
 
-An automated lead qualification and routing system built with **n8n**, **AI (Google Gemini)**, and **Airtable**. This workflow captures leads from a web form, uses AI to score their intent, and automatically routes them into Hot, Warm, or Cold pipelines — each with tailored CRM updates and email/Slack follow-ups.
+An end-to-end AI-powered lead qualification workflow built with **n8n**, **Google Gemini**, **Airtable**, **Slack**, and **Gmail**.
 
-## Overview
+The workflow automatically analyzes incoming real estate leads, classifies them into **Hot**, **Warm**, or **Cold**, stores them in Airtable CRM, sends team notifications, and automates customer email communication.
 
-Manually qualifying and following up with every real estate lead is slow and inconsistent. This workflow automates the entire process end-to-end:
+---
 
-1. A lead submits a form (name, phone, email, budget, timeline, property interest, etc.)
-2. An AI agent analyzes the lead's intent, urgency, and decision-making signals
-3. The lead is automatically classified as **Hot**, **Warm**, or **Cold**
-4. Based on the classification, the lead is saved to Airtable and receives a personalized, automated response
+# Overview
 
-## How it works
+Real estate businesses receive many inquiries every day, but manually reviewing every lead is time-consuming and inconsistent.
 
-```
-Webhook → Format Data → AI Qualification → Switch (Hot / Warm / Cold)
-```
+This workflow automates the complete process from lead capture to qualification and follow-up.
 
-### 🔥 Hot Lead
-High intent, ready to move within 30 days, and is the decision maker.
-- Record created in Airtable
-- Instant Slack alert sent to the sales team
-- Personalized email sent to the lead confirming a callback
+### Process
 
-### ☀️ Warm Lead
-Interested, but timeline is 1–6 months, or not the sole decision maker yet.
-- Record created in Airtable
-- Informational email sent to the lead
-- Wait period, then an automated follow-up email checking back in
+1. Customer submits a lead form
+2. Lead data is formatted
+3. Google Gemini AI analyzes the lead
+4. AI classifies the lead as:
+   - Hot
+   - Warm
+   - Cold
+5. Lead is saved in Airtable CRM
+6. Notifications and emails are automatically sent based on lead quality
 
-### ❄️ Cold Lead
-Timeline is beyond 6 months or "just exploring" — low urgency.
-- Record created in Airtable
-- Low-pressure "nurture" email sent, keeping the door open for future contact
+---
 
-## Tech stack
+# Project Highlights
 
-| Component | Tool |
-|---|---|
-| Workflow automation | [n8n](https://n8n.io) |
-| AI qualification | Google Gemini (Chat Model) |
-| Lead scoring logic | AI Agent + Structured Output Parser |
-| CRM / storage | Airtable |
-| Team notifications | Slack |
-| Email automation | Gmail |
-
-## Workflow diagram
-
-```
-Webhook
-  │
-  ▼
-Format Data (JavaScript)
-  │
-  ▼
-AI Agent (Gemini + Structured Output Parser)
-  │
-  ▼
-Switch (routes by lead score)
-  │
-  ├── Hot Lead  → Airtable → Slack alert → Email (customer)
-  ├── Warm Lead → Airtable → Email → Wait → Follow-up email
-  └── Cold Lead → Airtable → Nurture email
-```
-
-## Lead scoring logic
-
-The AI agent classifies each lead using a scoring matrix based on timeline and decision-making authority:
-
-- **Hot** — timeline is "Immediately" or "Within 30 days" AND the person is the decision maker
-- **Warm** — timeline is "1–6 months", or short timeline but not the decision maker, or needs a home loan with a slightly delayed timeline
-- **Cold** — timeline is "After 6 months" or "Just exploring", regardless of budget
-
-## Project Highlights
-
-- AI-based lead qualification using Google Gemini
+- AI-powered lead qualification using Google Gemini
 - Automatic Hot / Warm / Cold lead classification
 - Airtable CRM integration
 - Slack notifications for Hot leads
 - Automated Gmail responses
-- Follow-up automation for Warm leads
-- Built using n8n
+- Automatic follow-up emails for Warm leads
+- End-to-end workflow built in n8n
 
-```json
-{
-  "Full Name": "Hassan Raza",
-  "Email": "hassan@example.com",
-  "Phone no": "+919087976789",
-  "What are you Looking for?": "Buy",
-  "Timeline": "Within 30 days",
-  "Preferred Location": "Noida",
-  "Property Type": "Apartment",
-  "Budget / Expected Price": "Rs50 Lakhs - 1 Crore",
-  "Are you the decision maker?": "Yes",
-  "Will you need a home loan?": "No"
-}
+---
+
+# Workflow Architecture
+
+```
+Webhook
+    │
+    ▼
+JavaScript (Format Data)
+    │
+    ▼
+Google Gemini AI Agent
+    │
+    ▼
+Structured Output Parser
+    │
+    ▼
+Switch
+ ├── Hot Lead
+ │      │
+ │      ├── Airtable
+ │      ├── Slack Notification
+ │      └── Welcome Email
+ │
+ ├── Warm Lead
+ │      │
+ │      ├── Airtable
+ │      ├── Welcome Email
+ │      ├── Wait 3 Days
+ │      └── Follow-up Email
+ │
+ └── Cold Lead
+        │
+        ├── Airtable
+        └── Nurture Email
 ```
 
-## Screenshots
+---
 
-## Screenshots
+# Lead Qualification Logic
 
-### Workflow
+## Hot Lead
+
+- Timeline: Immediately / Within 30 Days
+- Decision Maker: Yes
+- High purchase intent
+
+Actions:
+
+- Save to Airtable
+- Slack notification
+- Immediate email
+
+---
+
+## Warm Lead
+
+- Timeline: 1–6 Months
+- Moderate buying intent
+- May require more nurturing
+
+Actions:
+
+- Save to Airtable
+- Welcome email
+- Wait 3 days
+- Follow-up email
+
+---
+
+## Cold Lead
+
+- Timeline: After 6 Months
+- Just exploring
+- Low urgency
+
+Actions:
+
+- Save to Airtable
+- Nurture email
+
+---
+
+# Tech Stack
+
+| Category | Tool |
+|----------|------|
+| Workflow Automation | n8n |
+| AI Model | Google Gemini |
+| AI Processing | AI Agent + Structured Output Parser |
+| CRM | Airtable |
+| Notifications | Slack |
+| Email Automation | Gmail |
+
+---
+
+# Screenshots
+
+## Workflow
 
 ![Workflow](workflow.png)
 
-### Lead Capture Form
+---
 
-![Form](form.png)
+## Lead Capture Form
 
-### Airtable CRM
+![Lead Form](form.png)
+
+---
+
+## Airtable CRM
 
 ![Airtable](airtable.png)
 
+---
 
-## Notes
+## Slack Notification
 
-- This is a demo/portfolio project. For production/client use, credentials (Gmail, Slack) should be connected using the client's own accounts, not the developer's.
-- The `Wait` node requires the workflow to be **published (active)** and the n8n instance to stay running for the full wait duration.
-- Each form submission triggers an independent execution — concurrent leads are processed in parallel and do not block one another.
-- The uploaded `workflow.json` should have Airtable base/table IDs, Slack channel IDs, and credential references sanitized/removed before publishing publicly.
+![Slack](slack.png)
 
-## Future improvements
+---
 
-- [ ] Deduplication check before creating new Airtable records
-- [ ] SLA timer + escalation for unresponded Hot leads
-- [ ] Calendar booking link (Calendly) in Hot lead email
-- [ ] Analytics dashboard tracking response times and conversion rates
-- [ ] Error handling / fallback path for failed AI qualification
+## Initial Email
 
-## Author
+![Email Output](email-output.jpg)
 
-## Author
+---
 
-**Hassan Raza**
+## Follow-up Email
 
-Freelance AI Automation Developer (Learning & Building with n8n, AI Agents, and Workflow Automation)
+![Follow-up Email](Email-follow-up.jpg)
 
-LinkedIn: https://linkedin.com/in/in/hassan-raza-1a8806418/
+---
+
+# Files Included
+
+- README.md
+- workflow.json
+- workflow.png
+- form.png
+- airtable.png
+- slack.png
+- email-output.jpg
+- Email-follow-up.jpg
+
+---
+
+# Notes
+
+This is a portfolio/demo project created to demonstrate AI-powered workflow automation using n8n.
+
+---
+
+# Future Improvements
+
+- [ ] HubSpot CRM integration
+- [ ] WhatsApp notifications
+- [ ] Lead deduplication
+- [ ] AI lead scoring dashboard
+- [ ] Calendly integration
+- [ ] Multi-language email support
+- [ ] Error handling and retry logic
+
+---
+
+# Author
+
+## Hassan Raza
+
+I'm currently learning and building practical AI Automation projects using:
+
+- n8n
+- AI Agents
+- Google Gemini
+- APIs
+- Airtable
+- Slack
+- Gmail Automation
+
+I'm continuously improving my skills by building real-world automation projects.
+
+Feedback and suggestions are always welcome.
